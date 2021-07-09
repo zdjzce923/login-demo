@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- <script src="/登录界面+验证码/参考/jq/jquery-3.3.1.min.js"></script> -->
+    <script>
+      window.onload = function () {
+        // 定义一个函数生成随机数并且放在变量中
+        var addYzm = getCode()
+
+        function getCode() {
+          // 定义一个数组存放验证码
+          var arr = [
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            'a',
+            'b',
+            'c',
+            'd',
+            'e',
+            'f',
+            'g',
+            'h',
+            'i',
+            'j',
+            'k',
+            'l',
+            'm',
+            'n',
+            'o',
+            'p',
+            'q',
+            'r',
+            's',
+            't',
+            'u',
+            'v',
+            'w',
+            'x',
+            'y',
+            'z',
+          ]
+          var add = ''
+          // 生成随机数
+          for (var i = 0; i < 4; i++) {
+            // 定义变量num存放随机数
+            var num = Math.round(Math.random() * arr.length)
+            add += arr[num]
+          }
+          return add
+        }
+
+        // 获取验证码随机id
+        var yanzhengma = document.getElementById('yanzhengma')
+        // 让验证码随机的文本内容=实例addYzm
+        yanzhengma.innerText = addYzm
+
+        // 绑定看不清切换图片单击响应函数
+        document.getElementsByTagName('a')[0].onclick = function () {
+          yanzhengma.innerText = getCode()
+        }
+
+        // 获取验证码输入框
+        var yanzheng = document.getElementById('yanzheng')
+        // 绑定登录单击响应函数 判断是否相等。
+        document.getElementById('submit').onclick = function () {
+          if (yanzheng.value != yanzhengma.innerText) {
+            alert('验证码输入不正确')
+          } else {
+            yanzheng.value = ''
+          }
+        }
+        const con = document.querySelector('.under') //获取整个登录框
+
+        //定义两个函数开关(门)
+        let isIn = true //鼠标进去的门，默认打开
+        let isOut = false //鼠标出去的们，默认关闭
+        let span //未创建的元素
+        //监听鼠标进入的时间+进去的方法
+        con.addEventListener('mouseenter', e => {
+          if (isIn) {
+            //如果进去的们打开着,执行此函数
+            //获取鼠标进入的位置
+            //生成元素的位置 = 进入点距离窗口的距离 - 父盒子距离窗口的距离
+            let inx = e.clientX - e.target.offsetLeft //鼠标进入时，离盒子左边的距离
+            let iny = e.clientY - e.target.offsetTop //鼠标进入时，离盒子顶部的距离
+            //创建一个span元素，并且给他对应的出生坐标
+            const el = document.createElement('span')
+
+            el.style.left = inx + 'px'
+            el.style.top = iny + 'px'
+            con.appendChild(el) //追加创建的元素到盒子
+
+            span = document.querySelector('.under span') //获取刚创建的span元素
+            span.classList.remove('out') //移除出去的动画
+            span.classList.add('in') //添加进入的动画
+            isIn = false //关闭进来的们(不能使用进入的方法)
+            isOut = true //打开出去的门(可以使用出去的方法)
+          }
+        })
+        //监听鼠标出来的时间+出来的方法
+        con.addEventListener('mouseleave', e => {
+          if (isOut) {
+            //如果出去的们打开着,执行此函数
+            //获取鼠标进入的位置
+            //生成元素的位置 = 进入点距离窗口的距离 - 父盒子距离窗口的距离
+            let inx = e.clientX - e.target.offsetLeft //鼠标进入时，离盒子左边的距离
+            let iny = e.clientY - e.target.offsetTop //鼠标进入时，离盒子顶部的距离
+
+            span.classList.remove('in') //移除进入的动画
+            span.classList.add('out') //添加出去的动画
+            span.setAttribute('style', `left: ${inx}px;top:${iny}px;`)
+            isOut = false //关闭出去的门(不可以使用出去的方法)
+            //动画结束后删除元素
+            setTimeout(() => {
+              con.removeChild(span) //删除元素
+              isIn = true //打开进来的们(能使用进入的方法)
+            }, 500)
+          }
+        })
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="under">
+      <h1>bilibili</h1>
+      <form action="">
+        <input type="text" id="code" placeholder="账号" />
+        <input type="password" id="passcode" placeholder="密码" />
+        <p id="yanzhengma">as2d</p>
+        <a href="javascript:;">看不清换一张</a>
+        <input type="text" id="yanzheng" placeholder="请输入验证码" />
+        <input type="button" id="submit" value="登录" />
+      </form>
+    </div>
+    <script></script>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2c3e50;
+}
+
+.under {
+    /* 弹性模型 设置从上而下排列 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    height: 500px;
+    box-shadow: 15px 15px 10px rgba(33, 45, 58, 0.3);
+    background-color: #34495e;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* 设置标题样式 */
+
+.under h1 {
+    color: white;
+    font-size: 50px;
+    /* 文字间隔 */
+    letter-spacing: 5px;
+    padding-left: 5px;
+    /* 文字粗细 */
+    font-weight: 100;
+    z-index: 1;
+    text-shadow: 6px 0px 2px rgba(33, 45, 58, 0.3);
+}
+
+.under form {
+    display: flex;
+    /* 依然是自上而下排列 但对齐方式设置为两个地方相等 */
+    justify-content: space-around;
+    flex-direction: column;
+    height: 250px;
+    width: 230px;
+    align-items: center;
+    z-index: 1;
+}
+
+.under form #code,
+#passcode {
+    height: 40px;
+    outline: none;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+
+/* 设置账号密码输入框内的文字默认样式为白色 */
+
+.under #code::placeholder,
+#passcode::placeholder {
+    color: #ffff;
+}
+
+.under #yanzhengma {
+    color: white;
+    font-size: 30px;
+}
+
+.under a {
+    display: block;
+    font-size: 5px;
+    color: white;
+}
+
+.under #yanzheng {
+    outline: none;
+    border: none;
+    background: none;
+    text-align: center;
+    border-bottom: 1px solid #ffff;
+    color: white;
+}
+
+
+/* 设置验证码输入框内的文字默认样式为白色 */
+
+.under #yanzheng::placeholder {
+    color: #ffff;
+}
+
+.under #submit {
+    height: 40px;
+    width: 180px;
+    outline: none;
+    background: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+
+/* 设置鼠标进入的样式 */
+
+.under .in {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #c551a2;
+    transform: translate(-50%, -50%);
+    /* 使用in动画，持续0.5s,缓出的时间函数，停留在最后一帧 */
+    animation: in 0.5s ease-out forwards;
+}
+
+
+/* 设置鼠标离开的样式 */
+
+.under .out {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 1200px;
+    height: 1200px;
+    border-radius: 50%;
+    background: #c551a2;
+    transform: translate(-50%, -50%);
+    animation: out 0.5s ease-out forwards;
+}
+
+
+/* 设置鼠标进入时，元素的动画 */
+
+@keyframes in {
+    /* 初始关键帧 */
+    0% {
+        width: 0;
+        height: 0;
+    }
+    /* 结尾关键帧 */
+    100% {
+        width: 1200px;
+        height: 1200px;
+    }
+}
+
+
+/* 设置鼠标离开时，元素的动画 */
+
+@keyframes out {
+    /* 初始关键帧 */
+    0% {
+        width: 1200px;
+        height: 1200px;
+    }
+    /* 结尾关键帧 */
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
